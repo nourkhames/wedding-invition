@@ -1,0 +1,430 @@
+/* style.css */
+
+/* إعدادات عامة وتناسق الألوان الفاخرة */
+:root {
+    --burgundy: #34090e;
+    --gold: #d4af37;
+    --blush-pink: #fcedeb;
+    --deep-pink: #e4b9b7;
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #43091b;
+    font-family: 'Cormorant Garamond', serif;
+    color: #4a151b;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- ستايل شاشة الظرف الخارجي البروفيشينال --- */
+.envelope-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* **التعديل هنا:** لضمان ملء الشاشة تماماً على الموبايل */
+    height: 100vh;
+    height: 100svh; /* لمتصفحات الموبايل الحديثة */
+    background-color: var(--burgundy);
+    background-image: radial-gradient(rgba(252, 237, 235, 0.04) 1px, transparent 0);
+    background-size: 24px 24px;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.envelope-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* باقي الـ flaps كما هي */
+.flap {
+    position: absolute;
+    background-color: var(--burgundy);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+}
+.flap.top { top: 0; left: 0; width: 100%; height: 50%; transform-origin: top; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+.flap.bottom { bottom: 0; left: 0; width: 100%; height: 50%; transform-origin: bottom; border-top: 1px solid rgba(255, 255, 255, 0.03); }
+.flap.left { top: 0; left: 0; width: 50%; height: 100%; transform-origin: left; border-right: 1px solid rgba(255, 255, 255, 0.03); }
+.flap.right { top: 0; right: 0; width: 50%; height: 100%; transform-origin: right; border-left: 1px solid rgba(255, 255, 255, 0.03); }
+
+.corner-floral { position: absolute; font-size: 24px; opacity: 0.3; pointer-events: none; }
+.top-left { top: 20px; left: 20px; }
+.bottom-right { bottom: 20px; right: 20px; }
+
+.envelope-overlay.open .flap.top { transform: scaleY(0); opacity: 0; }
+.envelope-overlay.open .flap.bottom { transform: scaleY(0); opacity: 0; }
+.envelope-overlay.open .flap.left { transform: scaleX(0); opacity: 0; }
+.envelope-overlay.open .flap.right { transform: scaleX(0); opacity: 0; }
+.envelope-overlay.open { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.stamp-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, var(--gold) 0%, #b89324 100%);
+    color: var(--burgundy);
+    padding: 16px 36px;
+    border-radius: 45px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 2px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+    animation: pulseBtn 1.8s infinite;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes pulseBtn {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.04); box-shadow: 0 6px 30px rgba(212, 175, 55, 0.4); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ========================================= */
+/* **التعديلات الرئيسية للقسم الأول (Hero)** */
+/* ========================================= */
+
+.hero {
+    /* **التعديل هنا:** لضمان ملء الشاشة تماماً على الموبايل */
+    height: 100vh;
+    height: 100svh; /* لمتصفحات الموبايل الحديثة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* عشان الفيديو ما يخرجش بره الإطار */
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* **التعديل السحري:** هذا يجعل الفيديو يملأ الشاشة تماماً */
+    object-fit: cover; 
+    
+    /* **إضافة للموبايل:** قد تحتاجين إلى تعديل الموضع الافتراضي إذا تم قص الفيديو بشكل غير مناسب */
+    /* object-position: center center; */ /* هذا هو الافتراضي */
+    
+    z-index: 0; /* في الخلفية */
+}
+
+/* المحتوى فوق الفيديو */
+/* تنسيق الحاوية الرئيسية للنصوص فوق الفيديو */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: 95%; 
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* تصحيح النص WE ARE GETTING MARRIED */
+.hero-content h2 {
+    font-size: 20px; /* حجم معقول للموبايل */
+    font-weight: 600; 
+    color: var(--gold); 
+    letter-spacing: 3px; 
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* ظل أسود خفيف */
+    margin-bottom: 10px;
+    margin-top: 0;
+    
+/* 1. الحجم والسمك */
+    font-size: 35px;           
+    font-weight: 900;          /* أقصى سمك للخط */
+    
+    /* 2. اللون والتحديد الأسود */
+    
+    -webkit-text-stroke: 0px #000000; /* تحديد أسود سميك (2 بكسل) */
+    
+    /* 3. ظل إضافي عشان الخط يبان أضخم (Effect) */
+    text-shadow: 3px 3px 6px #000000; 
+    
+    letter-spacing: 8px;       /* مسافة بين الحروف للفخامة */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+ 
+/* تصحيح الأسماء والتاريخ داخل الـ p */
+.hero-content p {
+    color: white; /* تغيير اللون من أسود لأبيض ليظهر فوق الفيديو */
+    font-weight: 400; 
+    font-size: 25px; /* حجم التاريخ */
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+
+    text-shadow: 2px 2px 4px #000000, 
+                 -1px -1px 0 #000000, 
+                 1px -1px 0 #000000, 
+                 -1px 1px 0 #000000, 
+                 1px 1px 0 #000000;
+}
+
+.hero-date {
+    font-size: 25px;            /* حجم الخط */
+    font-weight: 1000;           /* عشان يبقى سميك جداً */
+    color: #ffffff;             /* لون أبيض عشان يبرز */
+    
+    /* تحديد أسود */
+    /* -webkit-text-stroke: 1px #000000;  */
+    
+    /* ظل عشان يوضح أكتر فوق الفيديو */
+    /* text-shadow: 2px 2px 4px #000000; */
+    
+    
+    margin-top: 10px;
+}
+
+
+/* تنسيق الأسماء: أحمد ونور */
+.names-title {
+    font-family: 'Alex Brush', cursive;
+    font-size: 55px; 
+    line-height: 1.1;
+    color: #fff;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    /* ظل أسود قوي جداً يحيط بالحروف */
+    text-shadow: 3px 3px 0 #000, 
+                 -3px -3px 0 #000, 
+                 3px -3px 0 #000, 
+                 -3px 3px 0 #000,
+                 5px 5px 10px rgba(0,0,0,1);
+                 /* ده اللي هيعمل التحديد الأسود حول الخط */
+.names-title {
+    /* ... (سيبي كل اللي مكتوب جوه الكلاس زي ما هو) ... */
+    
+    /* زودي السطور دي بس جواه */
+    animation: popAndSettle 1.5s ease-out forwards;
+    animation-delay: 10s;
+    opacity: 0;
+}
+}
+
+/* أحمد - جهة اليسار */
+.names-title span:first-child {
+    align-self: flex-start;
+    margin-left: 10px;
+    
+}
+
+/* نور - جهة اليمين */
+.names-title span:last-child {
+    align-self: flex-end;
+    margin-right: 10px;
+}
+
+
+/* الـ & في المنتصف */
+.ampersand {
+    display: block;
+    font-size: 70px;
+    color: var(--deep-pink);
+    /* ظل أسود للـ & أيضاً لتكون واضحة */
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px 2px 5px #000;
+    
+}
+
+/* إزالة الـ margin-right الضخم الذي كان يفسد التنسيق على الموبايل */
+.names-title span {
+    display: block;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.names-title span:first-child {
+    /* لا نحتاج لـ margin ضخم على الموبايل */
+}
+
+.names-title span:last-child {
+    /* لا نحتاج لـ margin ضخم على الموبايل */
+}
+
+.scroll-icon {
+    position: absolute;
+    bottom: 20px; /* أقرب للقاع */
+    font-size: 24px;
+    color: white;
+    animation: bounce 2s infinite;
+    z-index: 2;
+}
+
+/* المقطع الثاني: العد التنازلي */
+.countdown-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--blush-pink);
+}
+
+.section-title {
+    font-size: 28px;
+    color: var(--burgundy);
+    margin-bottom: 30px;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* مسافة أصغر على الموبايل */
+    margin-top: 20px;
+}
+
+.time-box {
+    background: #fff;
+    padding: 10px;
+    min-width: 65px; /* أصغر قليلاً للموبايل */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(74, 21, 27, 0.05);
+}
+
+.time-box span {
+    font-size: 28px; /* أصغر قليلاً للموبايل */
+    font-weight: 600;
+    display: block;
+    color: var(--burgundy);
+}
+
+.time-box p {
+    font-size: 12px;
+    margin: 0;
+    text-transform: uppercase;
+    color: #7d5e62;
+}
+
+/* باقي الكود (قسم الصورة، التفاصيل، الفوتر، الأنيميشن) كما هو تماماً دون تغيير */
+.our-photo {
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+}
+.photo-section-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 380px;
+}
+.photo-frame {
+    width: 290px;
+    height: 440px;
+    position: relative;
+    border-radius: 160px 160px 20px 20px;
+    border: 2px solid var(--burgundy);
+    padding: 6px;
+    background-color: #fff;
+    box-shadow: 0 12px 30px rgba(74, 21, 27, 0.08);
+}
+.photo-frame::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px; right: 2px; bottom: 2px;
+    border: 1px solid var(--deep-pink);
+    border-radius: 155px 155px 16px 16px;
+    pointer-events: none;
+}
+.couple-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 150px 150px 12px 12px;
+}
+.photo-overlay {
+    position: absolute;
+    bottom: 6px; left: 6px; right: 6px;
+    background: linear-gradient(transparent, rgba(74, 21, 27, 0.75));
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    border-radius: 0 0 12px 12px;
+}
+.floral-decoration {
+    position: absolute;
+    font-size: 26px;
+    z-index: 5;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    animation: floatFlower 3s ease-in-out infinite alternate;
+}
+.left-flower { left: 10px; bottom: 50px; }
+.right-flower { right: 10px; top: 50px; animation-delay: 1.5s; }
+@keyframes floatFlower {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-6px) rotate(8deg); }
+}
+
+.details { padding: 80px 20px; background-color: #fdf8f8; }
+.details-box {
+    max-width: 400px; margin: 0 auto;
+    border: 1px solid var(--burgundy);
+    outline: 1px solid var(--deep-pink);
+    outline-offset: -5px;
+    padding: 40px 20px; text-align: center;
+    background: #fff;
+}
+.info-item { margin: 30px 0; }
+.info-label { font-size: 12px; letter-spacing: 3px; opacity: 0.7; font-weight: 600; color: var(--burgundy); }
+.info-text { font-size: 20px; font-weight: 600; margin: 5px 0; }
+.map-btn {
+    display: inline-block; margin-top: 15px; padding: 10px 20px;
+    border: 1px solid var(--burgundy); text-decoration: none;
+    color: var(--burgundy); font-size: 12px; letter-spacing: 2px;
+    transition: 0.3s; border-radius: 4px;
+}
+.map-btn:hover { background: var(--burgundy); color: #fff; }
+
+.rsvp-footer { padding: 80px 20px; text-align: center; background: var(--burgundy); color: #fff; }
+.script-text { font-family: 'Alex Brush', cursive; font-size: 45px; margin-bottom: 20px; }
+.butterfly-icon { font-size: 40px; margin-top: 30px; }
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+.fade-in { animation: fadeInUp 1.5s ease; }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes popAndSettle {
+    0% {
+        opacity: 0;
+        transform: scale(3);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0px);
+    }
+}

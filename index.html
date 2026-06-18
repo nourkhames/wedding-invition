@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="wedding-music" src="1781803289436.mp3" loop prefetch></audio>
+
+    <div class="envelope-overlay" id="envelopeScreen" onclick="startInvitation()">
+        <div class="envelope-box">
+            <div class="flap top"></div>
+            <div class="flap bottom"></div>
+            <div class="flap left"></div>
+            <div class="flap right"></div>
+            <div class="corner-floral top-left">🌸</div>
+            <div class="corner-floral bottom-right">🌸</div>
+            <div class="stamp-btn" onclick="startInvitation(event)">Open Invitation ✉️</div>
+        </div>
+    </div>
+
+    <div class="main-content hidden" id="mainContent">
+        
+      <section class="hero">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="VN20260618_181443.mp4" type="video/mp4">
+        </video>
+            
+            <div class="hero-content">
+                <h2 class="fade-in">WE ARE GETTING MARRIED</h2>
+<h1 class="names-title fade-in">
+    <span>D/Ahmed</span>
+    <span class="ampersand">&</span>
+    <span>eng/Nour</span>
+</h1>
+                <p class="hero-date fade-in">JUNE 26, 2026</p>
+                <div class="scroll-icon">↓</div>
+            </div>
+        </section>
+
+        <section class="countdown-section">
+            <h3 class="section-title">The Big Day is Coming</h3>
+            <div id="countdown">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <p>Mins</p>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <p>Secs</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="our-photo">
+            <div class="photo-section-wrapper">
+                <div class="floral-decoration left-flower">🌸</div>
+                <div class="photo-frame">
+                    <img src="ac487dad-b005-4f32-823a-bc6ff0c2be5a.jpg" alt="The Happy Couple" class="couple-img">
+                    <div class="photo-overlay">
+                        <h2 class="script-text">Our Love Story</h2>
+                    </div>
+                </div>
+                <div class="floral-decoration right-flower">🌸</div>
+            </div>
+        </section>
+
+        <section class="details">
+            <div class="details-box">
+                <h3 class="script-text">Where & When</h3>
+                <div class="info-item">
+                    <p class="info-label">DATE</p>
+                    <p class="info-text">Friday, June 26, 2026</p>
+                </div>
+                <div class="info-item">
+                    <p class="info-label">TIME</p>
+                    <p class="info-text">Starts at 8:00 PM</p>
+                </div>
+                <div class="info-item">
+    <p class="info-label">LOCATION</p>
+    <p class="info-text">Orchid Down Town Hall, Moharam Bek, Alexandria</p>
+    
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3412.9123456789!2d29.9123456789!3d31.19123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDExJzI4LjUiTiAyOcKwNTQnNDQuNCJF!5e0!3m2!1sar!2seg!4v1718722323000!5m2!1sar!2seg" width="100%" height="200" style="border:0; border-radius: 8px; margin-top: 15px;" allowfullscreen="" loading="lazy"></iframe>
+    
+    <a href="Https://maps.app.goo.gl/Ezv8XApoVvBy6cg78" target="_blank" class="map-btn">VIEW ON MAP</a>
+</div>
+            </div>
+        </section>
+
+        <footer class="rsvp-footer">
+            <h2 class="script-text">Kindly RSVP</h2>
+            <p>Please confirm your attendance by May 20th</p>
+            <p class="contact-info">Contact Nour at 555 5555 5555</p>
+            <div class="butterfly-icon">🦋</div>
+        </footer>
+    </div>
+
+    <script>
+        // دالة تشغيل الظرف وتشغيل الموسيقى المضمونة
+        function startInvitation(event) {
+            if (event) event.stopPropagation();
+            const audio = document.getElementById('wedding-music');
+            const envelopeScreen = document.getElementById('envelopeScreen');
+            const mainContent = document.getElementById('mainContent');
+
+            audio.play().catch(error => console.log("Audio waiting for push:", error));
+            envelopeScreen.classList.add('open');
+
+            setTimeout(() => {
+                envelopeScreen.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                window.scrollTo(0,0);
+            }, 600);
+        }
+
+        // كود العداد التنازلي الأساسي كما هو
+        const weddingDate = new Date("June 26, 2026 20:00:00").getTime();
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = d < 10 ? "0" + d : d;
+            document.getElementById("hours").innerHTML = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").innerHTML = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").innerHTML = s < 10 ? "0" + s : s;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "IT'S OUR WEDDING DAY!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
